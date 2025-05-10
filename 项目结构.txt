@@ -1,0 +1,9 @@
+/
+├── index.html                 # 主页面
+├── login.html                 # 登录/注册页面
+├── blog.html                  # 博客页面
+├── chat.html                  # 聊天页面
+├── worker.js                  # Cloudflare Worker处理程序
+├── requirements.txt           # Python后端依赖
+├── setup_backend.py           # Python后端配置脚本
+└── README.md                  # 项目说明

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 | 翰文学校育才分校</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #00CEC9;
+            --accent: #FD79A8;
+            --bg: #f9f9f9;
+            --text: #2D3436;
+            --glass: rgba(255, 255, 255, 0.25);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: #ff4757;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .auth-container {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container glass">
+        <div class="logo">翰文育才</div>
+        
+        <div class="tabs">
+            <div class="tab" id="login-tab">登录</div>
+            <div class="tab" id="register-tab">注册</div>
+        </div>
+        
+        <div class="form-container">
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">用户名</label>
+                    <input type="text" id="login-username" required>
+                    <div class="error-message" id="login-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">登录</button>
+                <div class="form-footer">
+                    还没有账号？<a href="#" id="switch-to-register">立即注册</a>
+                </div>
+            </form>
+            
+            <form id="register-form" style="display: none;">
+                <div class="form-group">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" required>
+                    <div class="error-message" id="username-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" required>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">确认密码</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">注册</button>
+                <div class="form-footer">
+                    已有账号？<a href="#" id="switch-to-login">立即登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 切换登录/注册表单
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const switchToRegister = document.getElementById('switch-to-register');
+        const switchToLogin = document.getElementById('switch-to-login');
+        
+        // 检查URL参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const isRegister = urlParams.get('register') === 'true';
+        
+        if (isRegister) {
+            showRegisterForm();
+        }
+        
+        loginTab.addEventListener('click', showLoginForm);
+        registerTab.addEventListener('click', showRegisterForm);
+        switchToRegister.addEventListener('click', showRegisterForm);
+        switchToLogin.addEventListener('click', showLoginForm);
+        
+        function showLoginForm() {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+        }
+        
+        function showRegisterForm() {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            loginTab.classList.remove('active');
+            registerTab.classList.add('active');
+        }
+        
+        // 登录表单提交
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            const errorElement = document.getElementById('login-error');
+            
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password }),
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    errorElement.textContent = data.message || '登录失败';
+                    errorElement.style.display = 'block';
+                }
+            } catch (error) {
+                errorElement.textContent = '网络错误，请重试';
+                errorElement.style.display = 'block';
+                console.error('登录错误:', error);
+            }
+        });
+        
+        // 注册表单提交
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+            
+            // 重置错误信息
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+            
+            // 验证密码匹配
+            if (password !== confirmPassword) {
+                passwordError.textContent = '两次输入的密码不一致';
+                passwordError.style.display = 'block';
+                return;
+            }
+            
+            // 验证密码强度
+            if (password.length < 6) {
+                passwordError.textContent = '密码长度至少为6位';
+                passwordError.style.display = 'block';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password }),
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    if (data.field === 'username') {
+                        usernameError.textContent = data.message;
+                        usernameError.style.display = 'block';
+                    } else {
+                        passwordError.textContent = data.message || '注册失败';
+                        passwordError.style.display = 'block';
+                    }
+                }
+            } catch (error) {
+                passwordError.textContent = '网络错误，请重试';
+                passwordError.style.display = 'block';
+                console.error('注册错误:', error);
+            }
+        });
+    </script>
+</body>
+</html>

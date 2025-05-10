@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园博客 | 翰文学校育才分校</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #00CEC9;
+            --accent: #FD79A8;
+            --bg: #f9f9f9;
+            --text: #2D3436;
+            --glass: rgba(255, 255, 255, 0.25);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .blog-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .blog-author {
+            font-weight: 600;
+        }
+
+        .blog-excerpt {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            align-self: flex-start;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .create-blog-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 90;
+            transition: all 0.3s ease;
+        }
+
+        .create-blog-btn:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            margin-top: 4rem;
+        }
+
+        .footer-disclaimer {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="glass">
+        <div class="logo">翰文育才</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">校园博客</a></li>
+                <li><a href="chat.html">全校交流</a></li>
+                <li><a href="#news">校园新闻</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons" id="auth-buttons">
+            <button class="btn btn-secondary" onclick="window.location.href='login.html'">登录</button>
+            <button class="btn btn-primary" onclick="window.location.href='login.html?register=true'">注册</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">校园博客</h1>
+            <button class="btn btn-primary" id="create-blog-desktop">写博客</button>
+        </div>
+        
+        <div class="blog-grid" id="blog-list">
+            <!-- 博客列表将通过JavaScript动态加载 -->
+        </div>
+    </main>
+
+    <div class="create-blog-btn" id="create-blog-mobile">+</div>
+
+    <footer>
+        <p class="footer-disclaimer">学生开发项目，侵权联系删除</p>
+    </footer>
+
+    <!-- 创建博客模态框 -->
+    <div class="modal" id="blog-modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h2 class="modal-title">写博客</h2>
+                <span class="close-modal" id="close-modal">&times;</span>
+            </div>
+            <form id="blog-form">
+                <div class="form-group">
+                    <label for="blog-title">标题</label>
+                    <input type="text" id="blog-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="blog-content">内容</label>
+                    <textarea id="blog-content" required></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-blog">取消</button>
+                    <button type="submit" class="btn btn-primary">发布</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 检查登录状态
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/auth/check', {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                
+                if (data.loggedIn) {
+                    const authButtons = document.getElementById('auth-buttons');
+                    authButtons.innerHTML = `
+                        <button class="btn btn-secondary" onclick="window.location.href='profile.html'">个人中心</button>
+                        <button class="btn btn-primary" onclick="logout()">退出登录</button>
+                    `;
+                    
+                    // 显示创建博客按钮
+                    document.getElementById('create-blog-desktop').style.display = 'block';
+                    document.getElementById('create-blog-mobile').style.display = 'flex';
+                } else {
+                    // 隐藏创建博客按钮
+                    document.getElementById('create-blog-desktop').style.display = 'none';
+                    document.getElementById('create-blog-mobile').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('检查登录状态失败:', error);
+            }
+        }
+        
+        // 退出登录
+        async function logout() {
+            await fetch('/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            window.location.href = 'index.html';
+        }
+        
+        // 加载博客列表
+        async function loadBlogs() {
+            try {
+                const response = await fetch('/api/blogs');
+                const blogs = await response.json();
+                
+                const blogList = document.getElementById('blog-list');
+                blogList.innerHTML = blogs.map(blog => `
+                    <div class="blog-card glass">
+                        <h3 class="blog-title">${blog.title}</h3>
+                        <div class="blog-meta">
+                            <span class="blog-author">${blog.author}</span>
+                            <span>${new Date(blog.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <p class="blog-excerpt">${blog.excerpt || blog.content.substring(0, 100)}...</p>
+                        <a href="blog-detail.html?id=${blog.id}" class="read-more">阅读全文 →</a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('加载博客失败:', error);
+            }
+        }
+        
+        // 模态框控制
+        const blogModal = document.getElementById('blog-modal');
+        const createBlogDesktop = document.getElementById('create-blog-desktop');
+        const createBlogMobile = document.getElementById('create-blog-mobile');
+        const closeModal = document.getElementById('close-modal');
+        const cancelBlog = document.getElementById('cancel-blog');
+        
+        function openModal() {
+            blogModal.classList.add('active');
+        }
+        
+        function closeModalFunc() {
+            blogModal.classList.remove('active');
+        }
+        
+        createBlogDesktop.addEventListener('click', openModal);
+        createBlogMobile.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFunc);
+        cancelBlog.addEventListener('click', closeModalFunc);
+        
+        // 点击模态框外部关闭
+        blogModal.addEventListener('click', (e) => {
+            if (e.target === blogModal) {
+                closeModalFunc();
+            }
+        });
+        
+        // 提交博客表单
+        document.getElementById('blog-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('blog-title').value;
+            const content = document.getElementById('blog-content').value;
+            
+            try {
+                const response = await fetch('/api/blogs', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ title, content }),
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    closeModalFunc();
+                    loadBlogs();
+                    document.getElementById('blog-form').reset();
+                } else {
+                    const data = await response.json();
+                    alert(data.message || '发布博客失败');
+                }
+            } catch (error) {
+                console.error('发布博客错误:', error);
+                alert('网络错误，请重试');
+            }
+        });
+        
+        // 页面加载时执行
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadBlogs();
+        });
+    </script>
+</body>
+</html>

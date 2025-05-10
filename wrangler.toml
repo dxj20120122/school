@@ -1,0 +1,13 @@
+name = "hanwen-school-worker"
+type = "javascript"
+account_id = "d5138aae215d7b432c81f3e46945696c"
+workers_dev = true
+route = "school.moujie.dpdns.org/*"
+
+kv_namespaces = [
+  { binding = "KV", id = "7UiZHKAykN5qHCfkulpsP8acWtQEOM-b_fYk0R8F" }
+]
+
+[vars]
+SITE_NAME = "翰文学校育才分校"
+SITE_DOMAIN = "school.moujie.dpdns.org"

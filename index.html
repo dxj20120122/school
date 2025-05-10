@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翰文学校育才分校 | 学生官网</title>
+    <meta name="site-config" content="翰文学校育才分校学生官网">
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #00CEC9;
+            --accent: #FD79A8;
+            --bg: #f9f9f9;
+            --text: #2D3436;
+            --glass: rgba(255, 255, 255, 0.25);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .news-section {
+            margin-bottom: 4rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .news-excerpt {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            align-self: flex-start;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            margin-top: 4rem;
+        }
+
+        .footer-disclaimer {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header class="glass">
+        <div class="logo">翰文育才</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">校园博客</a></li>
+                <li><a href="chat.html">全校交流</a></li>
+                <li><a href="#news">校园新闻</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-secondary" onclick="window.location.href='login.html'">登录</button>
+            <button class="btn btn-primary" onclick="window.location.href='login.html?register=true'">注册</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>翰文学校育才分校</h1>
+            <p>学生自主开发的校园交流平台，分享知识、交流思想、共同成长</p>
+            <div>
+                <button class="btn btn-primary" onclick="window.location.href='blog.html'">写博客</button>
+                <button class="btn btn-secondary" onclick="window.location.href='chat.html'">进入聊天</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card glass floating" style="animation-delay: 0s;">
+                <div class="feature-icon">📚</div>
+                <h3>校园博客</h3>
+                <p>分享你的学习心得、生活感悟，与全校师生交流思想</p>
+            </div>
+            <div class="feature-card glass floating" style="animation-delay: 0.5s;">
+                <div class="feature-icon">💬</div>
+                <h3>全校交流</h3>
+                <p>实时与全校同学聊天，讨论学习问题或校园生活</p>
+            </div>
+            <div class="feature-card glass floating" style="animation-delay: 1s;">
+                <div class="feature-icon">📢</div>
+                <h3>校园新闻</h3>
+                <p>获取学校最新动态、活动通知和重要公告</p>
+            </div>
+        </section>
+
+        <section class="news-section" id="news">
+            <h2 style="margin-bottom: 2rem; text-align: center;">最新校园新闻</h2>
+            <div class="news-grid">
+                <div class="news-card glass">
+                    <h3>校园科技节即将开幕</h3>
+                    <div class="news-date">2023年10月15日</div>
+                    <p class="news-excerpt">一年一度的校园科技节将于下周一开始，届时将有机器人展示、编程比赛等精彩活动...</p>
+                    <a href="#" class="read-more">阅读更多 →</a>
+                </div>
+                <div class="news-card glass">
+                    <h3>期中考试时间安排公布</h3>
+                    <div class="news-date">2023年10月10日</div>
+                    <p class="news-excerpt">教务处公布了本学期期中考试的具体时间安排，请同学们提前做好准备...</p>
+                    <a href="#" class="read-more">阅读更多 →</a>
+                </div>
+                <div class="news-card glass">
+                    <h3>校篮球队获得市级比赛冠军</h3>
+                    <div class="news-date">2023年10月5日</div>
+                    <p class="news-excerpt">在刚刚结束的市级中学生篮球比赛中，我校篮球队以优异成绩夺得冠军...</p>
+                    <a href="#" class="read-more">阅读更多 →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="footer-disclaimer">学生开发项目，侵权联系删除</p>
+    </footer>
+
+    <script>
+        // 检查登录状态
+        async function checkAuth() {
+            const response = await fetch('/api/auth/check', {
+                credentials: 'include'
+            });
+            const data = await response.json();
+            
+            if (data.loggedIn) {
+                const authButtons = document.querySelector('.auth-buttons');
+                authButtons.innerHTML = `
+                    <button class="btn btn-secondary" onclick="window.location.href='profile.html'">个人中心</button>
+                    <button class="btn btn-primary" onclick="logout()">退出登录</button>
+                `;
+            }
+        }
+
+        // 退出登录
+        async function logout() {
+            await fetch('/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            window.location.href = 'index.html';
+        }
+
+        // 加载新闻
+        async function loadNews() {
+            try {
+                const response = await fetch('/api/news/latest');
+                const news = await response.json();
+                
+                const newsGrid = document.querySelector('.news-grid');
+                newsGrid.innerHTML = news.map(item => `
+                    <div class="news-card glass">
+                        <h3>${item.title}</h3>
+                        <div class="news-date">${new Date(item.date).toLocaleDateString()}</div>
+                        <p class="news-excerpt">${item.excerpt}</p>
+                        <a href="news.html?id=${item.id}" class="read-more">阅读更多 →</a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('加载新闻失败:', error);
+            }
+        }
+
+        // 页面加载时执行
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadNews();
+        });
+    </script>
+</body>
+</html>
