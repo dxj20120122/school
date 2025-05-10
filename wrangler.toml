@@ -1,7 +1,7 @@
 name = "hanwen-school-worker"
 compatibility_date = "2025-05-10"
 account_id = "d5138aae215d7b432c81f3e46945696c"
-main = "index.html"
+main = "worker.js"
 
 kv_namespaces = [
   { binding = "KV", id = "a376ca9f754f4bbfb3ccc5fc5868a1e8" },
@@ -11,4 +11,5 @@ kv_namespaces = [
 [vars]
 SITE_NAME = "翰文学校育才分校"
 SITE_DOMAIN = "school.moujie.dpdns.org"
-route = "school.moujie.dpdns.org/*"
+
+routes = ["school.moujie.dpdns.org/*"]
