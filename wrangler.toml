@@ -1,11 +1,10 @@
 name = "hanwen-school-worker"
-type = "javascript"
+compatibility_date = "2025-05-10"
 account_id = "d5138aae215d7b432c81f3e46945696c"
-workers_dev = true
-route = "school.moujie.dpdns.org/*"
+main = "worker.js"  # 指定入口文件
 
 kv_namespaces = [
-  { binding = "KV", id = "7UiZHKAykN5qHCfkulpsP8acWtQEOM-b_fYk0R8F" }
+  { binding = "KV", id = "your-kv-namespace-id" }  # 替换为真实ID
 ]
 
 [vars]
