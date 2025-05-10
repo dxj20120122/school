@@ -1,0 +1,5 @@
+# 构建命令
+pip install -r requirements.txt && python setup_backend.py
+
+# 部署命令
+npx wrangler deploy
