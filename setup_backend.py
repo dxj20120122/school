@@ -37,22 +37,16 @@ def setup_cloudflare_backend():
     with open('worker.js', 'r') as f:
         worker_script = f.read()
     
+    # 设置上传Worker脚本的请求头
+    upload_headers = {
+        'Authorization': f'Bearer {CF_API_TOKEN}',
+        'Content-Type': 'application/javascript'
+    }
+    
     worker_response = requests.put(
         f'https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT_ID}/workers/scripts/{WORKER_NAME}',
-        headers=headers,
-        files={
-            'script.js': worker_script,
-            'metadata': (None, json.dumps({
-                'body_part': 'script.js',
-                'bindings': [
-                    {
-                        'type': 'kv_namespace',
-                        'name': 'KV',
-                        'namespace_id': kv_namespace_id
-                    }
-                ]
-            }), 'application/json')
-        }
+        headers=upload_headers,
+        data=worker_script
     )
     
     if worker_response.status_code != 200:
