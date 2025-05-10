@@ -67,7 +67,7 @@ def setup_cloudflare_backend():
         f'https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT_ID}/workers/routes',
         headers=headers,
         json={
-            'pattern': 'hanwen-school.example.com/*',
+            'pattern': 'school.moujie.dpdns.org/*',
             'script': WORKER_NAME
         }
     )
