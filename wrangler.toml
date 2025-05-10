@@ -4,7 +4,7 @@ account_id = "d5138aae215d7b432c81f3e46945696c"
 main = "worker.js"  # 指定入口文件
 
 kv_namespaces = [
-  { binding = "KV", id = "your-kv-namespace-id" }  # 替换为真实ID
+  { binding = "KV", id = "a376ca9f754f4bbfb3ccc5fc5868a1e8" }
 ]
 
 [vars]
