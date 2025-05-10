@@ -1,7 +1,7 @@
 name = "hanwen-school-worker"
 compatibility_date = "2025-05-10"
 account_id = "d5138aae215d7b432c81f3e46945696c"
-main = "worker.js"
+main = "index.html"
 
 kv_namespaces = [
   { binding = "KV", id = "a376ca9f754f4bbfb3ccc5fc5868a1e8" },
