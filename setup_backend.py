@@ -4,7 +4,7 @@ import os
 from datetime import datetime, timedelta
 
 # Cloudflare API配置
-CF_API_TOKEN = os.getenv('7UiZHKAykN5qHCfkulpsP8acWtQEOM-b_fYk0R8F')
+CF_API_TOKEN = os.getenv('z0ltKcvM0JTlKzlIJ6kX4-7t8jGtOaJ6Wl5tkVcK')  # 使用标准命名
 CF_ACCOUNT_ID = os.getenv('d5138aae215d7b432c81f3e46945696c')
 WORKER_NAME = 'hanwen-school-worker'
 KV_NAMESPACE_NAME = 'HANWEN_SCHOOL_STORE'
