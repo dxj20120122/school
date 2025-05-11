@@ -21,7 +21,7 @@ export default {
         }
 
         // WebSocket路由
-        if (path === '/ws') {  // 更简单的WebSocket路径
+        if (path === '/api/chat') {  // WebSocket聊天路由
             return handleWebSocket(request, env);
         }
 
